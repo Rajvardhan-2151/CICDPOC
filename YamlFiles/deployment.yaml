@@ -17,7 +17,7 @@ spec:
       - name: evceai
         image: raj2151/cicdpoc:argopoc
         ports:
-        - containerPort: 8096
+        - containerPort: 8080
         resources:
            requests:
               cpu: 100m
@@ -35,8 +35,8 @@ spec:
   ports:
     - name: evceai
       protocol: TCP
-      port: 8096
-      targetPort: 8096
+      port: 8080
+      targetPort: 8080
   type: NodePort
         
 
