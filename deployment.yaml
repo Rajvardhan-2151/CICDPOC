@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evceai
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evceai
+  template:
+    metadata:
+      labels:
+        app: evceai
+    spec:
+      containers:
+      - name: evceai
+        image: raj2151/cicdpoc:argopoc
+        ports:
+        - containerPort: 8096
+        resources:
+           requests:
+              cpu: 100m
+              memory: 50Mi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: evceai
+  namespace: default
+spec:
+  selector:
+    app: evceai
+  ports:
+    - name: evceai
+      protocol: TCP
+      port: 8096
+      targetPort: 8096
+  type: NodePort
+        
+
+
