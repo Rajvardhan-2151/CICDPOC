@@ -40,13 +40,8 @@ spec:
               mountPath: /app/jboss/properties/log4j/
             - name: drilldown-connection
               mountPath: /app/jboss/properties/drilldown/
-            - name: ldmeai-pvc-config
-              mountPath: /app/jboss/efs/logs
       restartPolicy: Always
       volumes:
-        - name: ldmeai-pvc-config
-          persistentVolumeClaim:
-            claimName: ldmeai-pvc
         - name: properties-connection
           configMap:
             name: ldmeai-properties-config
