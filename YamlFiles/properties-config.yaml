@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ldmeai-properties-config
-  namespace: csp-nprd
+  namespace: default
 data:
   application.properties:  |
     AWS_REGION: eu-west-1
