@@ -1,43 +1,75 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: evceai
-  namespace: default
+  name: ldmeai
+  namespace: csp-nprd
+  labels:
+    app: ldmeai
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
-      app: evceai
+      app: ldmeai
   template:
     metadata:
       labels:
-        app: evceai
+        app: ldmeai
     spec:
       containers:
-      - name: evceai
-        image: raj2151/cicdpoc:argopoc
-        ports:
-        - containerPort: 8080
-        resources:
-           requests:
-              cpu: 100m
-              memory: 50Mi
-
+        - name: ldmeai
+          image: raj2151:cicdpoc:ldmeaiargo
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 27018
+          resources:
+            requests:
+              cpu: "0.5"
+              memory: "3Gi"
+            limits:
+              cpu: "0.5"
+              memory: "3Gi"
+          volumeMounts: 
+            - name: properties-connection
+              mountPath: /app/jboss/properties/propfile/
+            - name: logging-connection
+              mountPath: /app/jboss/properties/log4j/
+            - name: drilldown-connection
+              mountPath: /app/jboss/properties/drilldown/
+            - name: ldmeai-pvc-config
+              mountPath: /app/jboss/efs/logs
+      restartPolicy: Always
+      volumes:
+        - name: ldmeai-pvc-config
+          persistentVolumeClaim:
+            claimName: ldmeai-pvc
+        - name: properties-connection
+          configMap:
+            name: ldmeai-properties-config
+        - name: logging-connection
+          configMap:
+            name: ldmeai-log4j2-config
+        - name: drilldown-connection
+          configMap:
+            name: ldmeai-drilldown-config
+            
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: evceai
-  namespace: default
+  name: ldmeai-service
+  namespace: csp-nprd
 spec:
+  type: LoadBalancer
   selector:
-    app: evceai
+    app: ldmeai
   ports:
-    - name: evceai
+    - name: ipaysmartkenaneai
       protocol: TCP
       port: 8080
-      targetPort: 8080
-  type: NodePort
-        
-
+      targetPort: 27018
 
