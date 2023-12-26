@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: ldmeai
-          image: raj2151:cicdpoc:ldmeaiargo
+          image: raj2151/cicdpoc:ldmeaiargo
           imagePullPolicy: Always
           ports:
             - containerPort: 27018
