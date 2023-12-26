@@ -8,7 +8,7 @@ data:
     <?xml version="1.0" encoding="UTF-8"?>
     <Configuration packages="" name="axis2" status="debug">
       <Properties>
-        <Property name="basePath">/home/jboss/logs</Property>
+        <Property name="basePath">/app/jboss/logs</Property>
       </Properties>
     <Appenders>
     <Console name="TPSlog" target="SYSTEM_OUT">
