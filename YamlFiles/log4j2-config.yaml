@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ldmeai-log4j2-config
+  namespace: csp-nprd
+data:
+  log4j2.xml: |
+    <?xml version="1.0" encoding="UTF-8"?>
+    <Configuration packages="" name="axis2" status="debug">
+      <Properties>
+        <Property name="basePath">/home/jboss/logs</Property>
+      </Properties>
+    <Appenders>
+    <Console name="TPSlog" target="SYSTEM_OUT">
+    <PatternLayout pattern="[TPSLOGS] [%tid] %msg %n"/>
+    </Console>
+    <Console name="APIlog" target="SYSTEM_OUT">
+    <PatternLayout pattern="[APPLOGS] [%tid] %msg %n"/>
+    </Console>
+    <RollingFile name="fileLogger"
+          fileName="${basePath}/debug/LDMEAI_app.log"
+          filePattern="${basePath}/debug/LDMEAI_app-%d{yyyy-MM-dd}.log">
+          <PatternLayout>
+            <pattern>[APPLOGS] [%tid] [%-5level] HostName:${hostname} %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg %n
+            </pattern>
+          </PatternLayout>
+          <Policies>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            <SizeBasedTriggeringPolicy size="100MB" />
+          </Policies>
+          <!-- Max 10 files will be created everyday -->
+          <DefaultRolloverStrategy max="10">
+            <Delete basePath="${basePath}/debug/" maxDepth="10">
+              <!-- Delete all files older than 5 days -->
+              <IfLastModified age="5d" />
+            </Delete>
+          </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="tpsLogger"
+          fileName="${basePath}/tps/LDMEAI_tps.log"
+          filePattern="${basePath}/tps/LDMEAI_tps-%d{yyyy-MM-dd}.log">
+          <PatternLayout>
+            <pattern>[TPSLOGS] [%tid] [%-5level] HostName:${hostname} %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c1 - %msg %n
+            </pattern>
+          </PatternLayout>
+          <Policies>
+            <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            <SizeBasedTriggeringPolicy size="100MB" />
+          </Policies>
+          <!-- Max 10 files will be created everyday -->
+          <DefaultRolloverStrategy max="10">
+            <Delete basePath="${basePath}/tps/" maxDepth="10">
+              <!-- Delete all files older than 5 days -->
+              <IfLastModified age="5d" />
+            </Delete>
+          </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+      <Logger name="ph.com.smart.common.util.TPSLogs"
+      additivity="false" level="ALL">
+              <appender-ref ref="tpsLogger"/>
+          <appender-ref ref="TPSlog"/>
+            </Logger>
+      <Root level="ALL" additivity="false">
+          <appender-ref ref="fileLogger" />
+          <appender-ref ref="APIlog" />
+      </Root>
+    </Loggers>
+    </Configuration>
