@@ -62,7 +62,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ldmeai-service
-  namespace: csp-nprd
+  namespace: default
 spec:
   type: LoadBalancer
   selector:
