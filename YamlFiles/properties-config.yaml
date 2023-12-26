@@ -13,7 +13,7 @@ data:
     DB_SECRET_NAME: csp/database/secrets
     CACHE_RELOAD_TIME: 500000
     CRMConnection: java:jboss/jdbc/CRM
-    PROPERTY_PATH: /app/jbossadmin/properties/LDMEAI/
+    PROPERTY_PATH: /app/jboss/properties/drilldown/
     PROPERTY_FILE: drilldown.properties
     LOG4J_PROPERTY_PATH: /app/jboss/properties/log4j/
     LOG4J_PROPERTIES_FILE: log4j2.xml
