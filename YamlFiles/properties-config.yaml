@@ -17,7 +17,7 @@ data:
     PROPERTY_FILE: drilldown.properties
     LOG4J_PROPERTY_PATH: /app/jboss/properties/log4j/
     LOG4J_PROPERTIES_FILE: log4j2.xml
-    USERNAME_PASSWORD_PATH: /home/appcsp/properties/PLDTSiebelEAI/
+    USERNAME_PASSWORD_PATH: /app/appcsp/properties/PLDTSiebelEAI/
     PLDTKENANEAI_WEBSERVICE_URL: http://10.123.173.213:7777/PLDTKenanEAINeo
     TOUCHPOINTEAI_WEBSERVICE_URL: http://10.110.25.118:8090/TouchPointEAI_homerun/services/CSPTouchPointWebServiceImpl
     DMSEAI_WEBSERVICE_URL: http://10.131.5.64:9087/DMSEAI
@@ -29,6 +29,6 @@ data:
     SAP_FAILURE_DELIVERY_SUFFIX: /RESTAdapter/MM/setDeliveryFailure/
     ENV_TYPE: PRODUCTION
     VALIDATE_TOKEN_URL: http://10.110.25.114:8180/authentication-eai/token/validate
-    APP_PROP_FILE: /home/jboss/properties/propfile/application.properties
-    RESPONSE_FILE: /home/jbossadmin/properties/LDMEAI/response.properties
+    APP_PROP_FILE: /app/jboss/properties/propfile/application.properties
+    RESPONSE_FILE: /app/jbossadmin/properties/LDMEAI/response.properties
     MULESOFT_EAI_URL: http://10.110.25.114:8180/mulesoft-eai/delivery/status/update
