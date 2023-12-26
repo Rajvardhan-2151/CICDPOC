@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ldmeai-drilldown-config
-  namespace: csp-nprd
+  namespace: default
 data:
   drilldown.properties: |
     UTILITY_WEBSERVICE_Connection=ON
