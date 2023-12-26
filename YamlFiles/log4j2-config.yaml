@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ldmeai-log4j2-config
-  namespace: csp-nprd
+  namespace: default
 data:
   log4j2.xml: |
     <?xml version="1.0" encoding="UTF-8"?>
